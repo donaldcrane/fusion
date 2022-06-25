@@ -1,5 +1,7 @@
 # fusion
 
+[![test](https://github.com/donaldcrane/fusion/actions/workflows/.node.js.yml/badge.svg)](https://github.com/donaldcrane/fusion/actions/workflows/.node.js.yml)
+
 [![Coverage Status](https://coveralls.io/repos/github/donaldcrane/fusion/badge.svg?branch=main)](https://coveralls.io/github/donaldcrane/fusion?branch=main)
 
 # Documentation
