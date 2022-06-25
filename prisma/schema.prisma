@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model beneficiary {
+  id               String   @unique @default(uuid()) @db.VarChar(50)
+  owner            String
+  beneficiaryName  String
+  beneficiaryEmail String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
+  beneficiaryId    String
+  beneficiary      users    @relation("beneficiary", fields: [beneficiaryId], references: [id])
+  users            users    @relation("owner", fields: [owner], references: [id], onDelete: Cascade, map: "Beneficiary_owner_fkey")
+
+  @@index([owner], map: "Beneficiary_owner_fkey")
+  @@index([beneficiaryId], map: "beneficiary_beneficiaryId_fkey")
+}
+
+model credit {
+  id                         String           @unique @default(uuid()) @db.VarChar(50)
+  amount                     Int
+  type                       enum_Credit_type
+  reference                  String?          @db.VarChar(255)
+  status                     enum_status      @default(pending)
+  user                       String
+  sender                     String
+  createdAt                  DateTime         @default(now())
+  updatedAt                  DateTime         @default(now())
+  users_credit_senderTousers users            @relation("credit_senderTousers", fields: [sender], references: [id], onDelete: Cascade, map: "Credit_sender_fkey")
+  users_credit_userTousers   users            @relation("credit_userTousers", fields: [user], references: [id], onDelete: Cascade, map: "Credit_user_fkey")
+
+  @@index([sender], map: "Credit_sender_fkey")
+  @@index([user], map: "Credit_user_fkey")
+}
+
+model debit {
+  id                          String          @unique @default(uuid()) @db.VarChar(50)
+  amount                      Int
+  user                        String
+  type                        enum_Debit_type
+  receiver                    String
+  createdAt                   DateTime        @default(now())
+  updatedAt                   DateTime        @default(now())
+  users_debit_receiverTousers users           @relation("debit_receiverTousers", fields: [receiver], references: [id], onDelete: Cascade, map: "Debit_receiver_fkey")
+  users_debit_userTousers     users           @relation("debit_userTousers", fields: [user], references: [id], map: "Debit_user_fkey")
+
+  @@index([receiver], map: "Debit_receiver_fkey")
+  @@index([user], map: "Debit_user_fkey")
+}
+
+model users {
+  id                          String        @unique(map: "Users_id_key") @default(uuid()) @db.VarChar(50)
+  email                       String        @unique(map: "Users_email_key") @db.VarChar(255)
+  password                    String
+  name                        String
+  createdAt                   DateTime      @default(now())
+  updatedAt                   DateTime      @default(now())
+  balance                     Int           @default(0)
+  beneficiary                 beneficiary[] @relation("beneficiary")
+  owner                       beneficiary[] @relation("owner")
+  credit_credit_senderTousers credit[]      @relation("credit_senderTousers")
+  credit_credit_userTousers   credit[]      @relation("credit_userTousers")
+  debit_debit_receiverTousers debit[]       @relation("debit_receiverTousers")
+  debit_debit_userTousers     debit[]       @relation("debit_userTousers")
+}
+
+enum enum_Credit_type {
+  card_payment
+  online_transfer
+}
+
+enum enum_Debit_type {
+  transfer
+  withdrawal
+}
+
+enum enum_status {
+  pending
+  failed
+  completed
+  refunded
+  settled
+  success
+  cancelled
+  conflict
+}
