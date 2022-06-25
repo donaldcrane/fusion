@@ -6,7 +6,7 @@ import router from "./routes/index";
 import config from "./config";
 
 import reqLogger from "./utils/reqLogger";
-import {CustomRequest} from "../src/utils/interface";
+import { CustomRequest } from "../src/utils/interface";
 dotenv.config();
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
 
 declare global {
   namespace Express {
-    interface Request extends CustomRequest {}
+    interface Request extends CustomRequest { }
   }
 }
 
@@ -38,8 +38,8 @@ app.use((req, res, next) => res.status(404).send({
 }));
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  if (!err.statusCode || err.statusCode === 500 || err.statusCode === 502) {
-    config.logger.error(`
+  if (!err.statusCode || err.statusCode === 500) {
+    console.log(`
       Error caught at ${req.path}, 
       Request body: ${JSON.stringify(req.body)},
       Request User: ${JSON.stringify(req.user)},
@@ -49,7 +49,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
       Error Logs: ${JSON.stringify(err.stack)}
   }`);
   }
-  return res.status(err.statusCode).send(err.error);
 });
 
 app.listen(port, () => {
