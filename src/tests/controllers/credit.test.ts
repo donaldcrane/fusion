@@ -33,7 +33,7 @@ describe("Add credit", () => {
       .set("Accept", "application/json")
       .send(credit)
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         done();
       });
   });

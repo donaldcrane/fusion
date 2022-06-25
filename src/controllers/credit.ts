@@ -41,7 +41,7 @@ export default class creditController {
       };
       const paymentDetails = await initializePayment(paystack_data);
 
-      return successResponse(res, 200, "Transaction Created", paymentDetails);
+      return successResponse(res, 201, "Transaction Created", paymentDetails);
     } catch (error) {
       return errorResponse(res, 500, "Server error.");
     }
@@ -138,7 +138,7 @@ export default class creditController {
       await db.credit.delete({where: { id: creditId}});
       return successResponse(res, 200, "Successfully Deleted transaction.");
     } catch (error) {
-      return errorResponse(res, 404,  "Resource not found.");
+      return errorResponse(res, 500,  "Resource not found.");
     }
   }
 
