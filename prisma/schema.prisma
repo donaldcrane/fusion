@@ -16,7 +16,7 @@ model beneficiary {
   updatedAt        DateTime @default(now())
   beneficiaryId    String
   beneficiary      users    @relation("beneficiary", fields: [beneficiaryId], references: [id])
-  users            users    @relation("owner", fields: [owner], references: [id], onDelete: Cascade, map: "Beneficiary_owner_fkey")
+  users            users    @relation("owner", fields: [owner], references: [id], map: "Beneficiary_owner_fkey")
 
   @@index([owner], map: "Beneficiary_owner_fkey")
   @@index([beneficiaryId], map: "beneficiary_beneficiaryId_fkey")
@@ -32,8 +32,8 @@ model credit {
   sender                     String
   createdAt                  DateTime         @default(now())
   updatedAt                  DateTime         @default(now())
-  users_credit_senderTousers users            @relation("credit_senderTousers", fields: [sender], references: [id], onDelete: Cascade, map: "Credit_sender_fkey")
-  users_credit_userTousers   users            @relation("credit_userTousers", fields: [user], references: [id], onDelete: Cascade, map: "Credit_user_fkey")
+  users_credit_senderTousers users            @relation("credit_senderTousers", fields: [sender], references: [id], map: "Credit_sender_fkey")
+  users_credit_userTousers   users            @relation("credit_userTousers", fields: [user], references: [id], map: "Credit_user_fkey")
 
   @@index([sender], map: "Credit_sender_fkey")
   @@index([user], map: "Credit_user_fkey")
@@ -47,7 +47,7 @@ model debit {
   receiver                    String
   createdAt                   DateTime        @default(now())
   updatedAt                   DateTime        @default(now())
-  users_debit_receiverTousers users           @relation("debit_receiverTousers", fields: [receiver], references: [id], onDelete: Cascade, map: "Debit_receiver_fkey")
+  users_debit_receiverTousers users           @relation("debit_receiverTousers", fields: [receiver], references: [id], map: "Debit_receiver_fkey")
   users_debit_userTousers     users           @relation("debit_userTousers", fields: [user], references: [id], map: "Debit_user_fkey")
 
   @@index([receiver], map: "Debit_receiver_fkey")

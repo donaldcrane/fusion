@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import db from "../../models/index";
-import { user4 } from "./user-sign-in-test-data";
+import { user4, user8 } from "./user-sign-in-test-data";
 import { debit, debit2, debit3 } from "./debit-data";
 import server from "../../app";
 import { IDebit } from "../../utils/interface";
@@ -18,19 +18,11 @@ describe("Add debit Transaction", () => {
       .request(server)
       .post("/api/v1/users/signin")
       .set("Accept", "application/json")
-      .send(user4)
+      .send(user8)
       .end((err, res) => {
         if (err) throw err;
         userToken = res.body.data.token;
         done();
-      });
-  });
-  beforeEach(async () => {
-   await db.users.update({
-        where: {
-          email: "garrasdy@gmail.com"
-        }, 
-        data: { balance: {increment: 1000} }
       });
   });
   it("should allow user with token send money", done => {
@@ -76,9 +68,9 @@ describe("Delete debit Transaction", () => {
     await db.debit.create({
       data: {
       id: "c375c640-81ff-405a-89a8-460ea2f71875",
-      user: "c9fca041-3b1c-4b57-b835-53401c48905e",
+      user: "1d809e97-e26e-4597-aff3-070d6bf4599d",
       amount: 10000,
-      receiver: "ae7025ad-65b6-44d7-97f0-daeb2db01a40",
+      receiver: "1857f7f4-a3e0-4bd4-b1f3-b98c045b4ed2",
       type: "transfer"
       }
     });
@@ -137,17 +129,17 @@ describe("GET Debit Transactions api route", () => {
     await db.debit.create({
       data: { 
       id: "c375c640-81ff-405a-89a8-460ea2f71875",
-      user: "c9fca041-3b1c-4b57-b835-53401c48905e",
+      user: "1d809e97-e26e-4597-aff3-070d6bf4599d",
       amount: 10000,
-      receiver: "ae7025ad-65b6-44d7-97f0-daeb2db01a40",
+      receiver: "1857f7f4-a3e0-4bd4-b1f3-b98c045b4ed2",
       type: "transfer"
     }});
     await db.debit.create({
       data: {
       id: "a430e505-937b-4908-9422-7aa57044e5b8",
-      user: "c9fca041-3b1c-4b57-b835-53401c48905e",
+      user: "1d809e97-e26e-4597-aff3-070d6bf4599d",
       amount: 6000,
-      receiver: "ae7025ad-65b6-44d7-97f0-daeb2db01a40",
+      receiver: "1857f7f4-a3e0-4bd4-b1f3-b98c045b4ed2",
       type: "transfer"
     }});
   });

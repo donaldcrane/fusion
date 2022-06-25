@@ -27,7 +27,11 @@ const user7 = {
   email: "fiyin@gmail.com",
   password: "123456",
 };
+const user8 = {
+  email: "donald@gmail.com",
+  password: "password",
+};
 
 export {
-  user, user2, user3, user4, user5, user6, user7
+  user, user2, user3, user4, user5, user6, user7, user8
 };

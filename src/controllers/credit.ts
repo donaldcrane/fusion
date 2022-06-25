@@ -145,7 +145,8 @@ export default class creditController {
   static async paystackWebhook(req: Request, res: Response, next: NextFunction) {
     try {
       const { data } = req.body;
-      if (data.status === "success" && data.gateway_response === "Successful") return res.status(200).json({ status: 200, message: "Transaction was Successful" });
+      if (data.status === "success" && data.gateway_response === "Successful")
+        return successResponse(res, 200, "Transaction was Successful");
 
       return successResponse(res, 200, "Transaction was not Successful");
     } catch (error) {

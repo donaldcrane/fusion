@@ -27,7 +27,7 @@ app.use("/api/v1", router);
 
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Revie Housing inc");
+  res.send("Welcome to Donald Fusion app");
 });
 
 // Global 404 error handler
@@ -38,7 +38,7 @@ app.use((req, res, next) => res.status(404).send({
 }));
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  if (!err.statusCode || err.statusCode === 500) {
+  if (!err.statusCode || err.statusCode === 500 || err.statusCode === 502) {
     config.logger.error(`
       Error caught at ${req.path}, 
       Request body: ${JSON.stringify(req.body)},

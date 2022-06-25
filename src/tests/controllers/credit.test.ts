@@ -67,10 +67,10 @@ describe("Delete credit Transaction", () => {
     await db.credit.create({
       data: {
         id: "c375c640-81ff-405a-89a8-460ea2f71745",
-        user: "c9fca041-3b1c-4b57-b835-53401c48905e",
+        user: "1d809e97-e26e-4597-aff3-070d6bf4599d",
         amount: 40000,
         type: "card_payment",
-        sender: "c9fca041-3b1c-4b57-b835-53401c48905e",
+        sender: "1d809e97-e26e-4597-aff3-070d6bf4599d",
         reference: "njskcc",
         status: "success"
       }
@@ -130,10 +130,10 @@ describe("GET credit api route", () => {
     await db.credit.create({
       data: {
         id: "c375c640-81ff-405a-89a8-460ea2f71757",
-        user: "c9fca041-3b1c-4b57-b835-53401c48905e",
+        user: "1d809e97-e26e-4597-aff3-070d6bf4599d",
         amount: 40000,
         type: "card_payment",
-        sender: "c9fca041-3b1c-4b57-b835-53401c48905e",
+        sender: "1d809e97-e26e-4597-aff3-070d6bf4599d",
         reference: "njskcc",
         status: "success"
       }
@@ -141,10 +141,10 @@ describe("GET credit api route", () => {
     await db.credit.create({
       data: {
         id: "5587d202-580b-46cb-a58f-37344694130a",
-        user: "c9fca041-3b1c-4b57-b835-53401c48905e",
+        user: "1d809e97-e26e-4597-aff3-070d6bf4599d",
         amount: 50000,
         type: "card_payment",
-        sender: "c9fca041-3b1c-4b57-b835-53401c48905e",
+        sender: "1d809e97-e26e-4597-aff3-070d6bf4599d",
         reference: "njskcc",
         status: "success"
       }});

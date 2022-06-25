@@ -30,7 +30,7 @@ export default class AdminDebitController {
       }
       const { balance } = user;
       if (balance < amount) {
-        return errorResponse(res, 409, "Sorry there is not enough money in your account.");
+        return errorResponse(res, 400, "Sorry there is not enough money in your account.");
       }
       const receiver = await db.users.findUnique({ where: { email } });
       if (!receiver) {

@@ -1,7 +1,7 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import server from "../../app";
-import { user, user2, user3 } from "./user-sign-in-test-data";
+import { user, user2, user3, user8 } from "./user-sign-in-test-data";
 import { IUser } from "../../utils/interface";
 import { user4 } from "./user-sign-in-test-data";
 
@@ -95,7 +95,7 @@ describe("Add beneficiary account", () => {
       .request(server)
       .post("/api/v1/users/signin")
       .set("Accept", "application/json")
-      .send(user4)
+      .send(user8)
       .end((err, res) => {
         if (err) throw err;
         userToken = res.body.data.token;
@@ -105,7 +105,7 @@ describe("Add beneficiary account", () => {
   it("should allow user add beneficiary account", done => {
     chai
       .request(server)
-      .post("/api/v1/users/beneficiary/ae7025ad-65b6-44d7-97f0-daeb2db01a40")
+      .post("/api/v1/users/beneficiary/1857f7f4-a3e0-4bd4-b1f3-b98c045b4ed2")
       .set("Authorization", `Bearer ${userToken}`)
       .set("Accept", "application/json")
       .end((err, res) => {
