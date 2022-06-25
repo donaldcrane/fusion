@@ -4,11 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node ./dist/app.js",
-    "clean": "rm -rf dist && mkdir dist",
+    "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
-    "build": "tsc",
-    "heroku-postbuild": "npm run clean && npm run build",
+    "postinstall": "tsc",
     "seed": "ts-node ./prisma/seed.ts",
     "test": "npm run seed &&  nyc --require --reporter=html --reporter=text mocha -r ts-node/register './dist/tests/index.js' --timeout 50000 --recursive --exit || true ",
     "coverage": "nyc npm run test && nyc report --reporter=text-lcov --reporter=lcov | ts-node/register ./node_modules/coveralls/bin/coveralls.js --verbose",
