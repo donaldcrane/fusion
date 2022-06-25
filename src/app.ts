@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import router from "./routes/index";
 import config from "./config";
 
-import reqLogger from "../src/utils/reqLogger";
+import reqLogger from "./utils/reqLogger";
 import {CustomRequest} from "../src/utils/interface";
 dotenv.config();
 
